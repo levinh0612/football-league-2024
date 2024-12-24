@@ -11,7 +11,7 @@ const { TabPane } = Tabs;
 const App = () => {
   return (
     <div style={{ padding: "20px" }}>
-      <h1 style={{ textAlign: "center" }}>Football League 2024</h1>
+      <h1 style={{ textAlign: "center" }}>WLF Champion League 2024</h1>
       <Tabs defaultActiveKey="1" centered>
         <TabPane tab="Trận đấu" key="1">
           <Matches />
