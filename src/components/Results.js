@@ -58,7 +58,7 @@ const Results = () => {
                 ))}
               </ul>
             ) : (
-              'Không có cầu thủ nào có thẻ đỏ.'
+              '  Không có cầu thủ nào có thẻ đỏ.'
             )}
           </li>
           <li><span className="font-semibold">Thẻ vàng:</span> 50k
