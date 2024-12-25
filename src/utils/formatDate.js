@@ -1,21 +1,19 @@
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+// Extend dayjs with plugins
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const formatDate = (dateString) => {
-  const date = dayjs(dateString);
-  const now = dayjs();
-  const diffInDays = date.diff(now, "day");
+  console.log("😱 + formatDate + dateString:", dateString);
 
-  // if (diffInDays === 0) {
-  //   return `Today, ${date.format("hh:mm A")}`; // Format for "Today"
-  // } else if (diffInDays === 1) {
-  //   return `Tomorrow, ${date.format("hh:mm A")}`; // Format for "Tomorrow"
-  // } else if (diffInDays === -1) {
-  //   return `Yesterday, ${date.format("hh:mm A")}`; // Format for "Yesterday"
-  // } else {
-  //   return date.format("DD-MM-YYYY hh:mm A"); // Default format
-  // }
+  // Convert the date string to the Asia/Ho_Chi_Minh timezone
+  const date = dayjs(dateString).utc().tz("Asia/Ho_Chi_Minh", true); // Treat input as UTC time first
 
-  return date.format("DD-MM-YYYY hh:mm A"); // Default format
+  // Format the date as 'DD-MM-YYYY HH:mm A'
+  return date.format("DD-MM-YYYY HH:mm A");
 };
 
 export default formatDate;

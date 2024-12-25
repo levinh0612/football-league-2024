@@ -2,16 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+/* MP Regular */
+@font-face {
+  font-family: "MP-Regular";
+  src: url('./assets/fonts/azuki-fonts/MP/MP-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* MP Bold */
+@font-face {
+  font-family: "MP-Bold";
+  src: url('./assets/fonts/azuki-fonts/MP/MP-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* MSB Led Counter */
+@font-face {
+  font-family: "LedCounter";
+  src: url('./assets/fonts/azuki-fonts/MSB/led_counter-7.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* MSB Mamuka Bold */
+@font-face {
+  font-family: "Mamuka-Bold";
+  src: url('./assets/fonts/azuki-fonts/MSB/manuka-bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* MSB Mono Regular */
+@font-face {
+  font-family: "MonoRegular";
+  src: url('./assets/fonts/azuki-fonts/MSB/MonoRegular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'MP-Regular', 'MP-Bold', 'LedCounter', 'Mamuka-Bold', 'MonoRegular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+h2, span {
+  font-family: 'LedCounter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
