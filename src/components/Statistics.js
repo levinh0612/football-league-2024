@@ -31,14 +31,14 @@ const Statistics = () => {
   if (error) return <div className="text-center text-red-500">{error}</div>;
 
   // Render statistics
-  const renderStats = (title, stats, statKey) => (
+  const renderStats = (title, stats, statKey, unit) => (
     <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold text-white">{title}</h2>
       <ul className="mt-4 space-y-2">
         {stats.map((player, index) => (
           <li key={index} className="flex justify-between text-white">
             <p>{player.name}</p>
-            <p>{player[statKey]} Thẻ</p>
+            <p>{player[statKey]} {unit}</p>
           </li>
         ))}
       </ul>
@@ -47,9 +47,9 @@ const Statistics = () => {
 
   return (
     <div className="p-4 max-w-4xl mx-auto space-y-4">
-      {renderStats('Cầu thủ ghi bàn nhiều nhất', playersStats.topGoals, 'goals')}
-      {renderStats('Cầu thủ có thẻ vàng nhiều nhất', playersStats.topYellowCards, 'yellow_cards')}
-      {renderStats('Cầu thủ có thẻ đỏ nhiều nhất', playersStats.topRedCards, 'red_cards')}
+      {renderStats('Cầu thủ ghi bàn nhiều nhất', playersStats.topGoals, 'goals', 'bàn')}
+      {renderStats('Cầu thủ có thẻ vàng nhiều nhất', playersStats.topYellowCards, 'yellow_cards', 'thẻ')}
+      {renderStats('Cầu thủ có thẻ đỏ nhiều nhất', playersStats.topRedCards, 'red_cards', 'thẻ')}
     </div>
   );
 };
