@@ -7,7 +7,6 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const formatDate = (dateString) => {
-  console.log("😱 + formatDate + dateString:", dateString);
 
   // Convert the date string to the Asia/Ho_Chi_Minh timezone
   const date = dayjs(dateString).utc().tz("Asia/Ho_Chi_Minh", true); // Treat input as UTC time first

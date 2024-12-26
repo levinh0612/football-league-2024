@@ -16,7 +16,6 @@ const DeclareMatchModal = ({
   match,
   onSubmitDetails,
 }) => {
-
   const homeTeam = { name: match?.home_team, id: match?.home_id };
   const awayTeam = { name: match?.away_team, id: match?.away_id };
   const date = match?.date;
@@ -30,7 +29,7 @@ const DeclareMatchModal = ({
   const [eventCount, setEventCount] = useState(1);
   const [homePlayers, setHomePlayers] = useState([]); // List of home team players
   const [awayPlayers, setAwayPlayers] = useState([]); // List of away team players
-
+  const [isDefined, setIsDefined] = useState(match?.is_defined);
 
   // Fetch players for both home and away teams
   useEffect(() => {
@@ -50,6 +49,36 @@ const DeclareMatchModal = ({
 
     fetchPlayers();
   }, [homeTeam.id, awayTeam.id]);
+
+  // Fetch match details if the match is already defined
+  useEffect(() => {
+    const fetchMatchDetails = async () => {
+      try {
+        if (isDefined && match?.id) {
+          const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/match/${match.id}`);
+          const matchData = response.data;
+  
+          // Populate form fields with match data
+          setHomeScore(matchData.home_score || "0");
+          setAwayScore(matchData.away_score || "0");
+  
+          // Map events to the expected format
+          setEventList(
+            matchData.events.map((event) => ({
+              homePlayer: event.homePlayer || "",
+              awayPlayer: event.awayPlayer || "",
+              eventType: event.event_type, // Ensure it matches `events` options
+              eventCount: event.event_count,
+            }))
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching match details:", error);
+      }
+    };
+  
+    fetchMatchDetails();
+  }, [isDefined, match?.id]);
 
   const handleAddEvent = () => {
     if ((homePlayer || awayPlayer) && eventType) {
@@ -97,7 +126,25 @@ const DeclareMatchModal = ({
 
   // Remove an event from the list
   const handleRemoveEvent = (index) => {
-    const updatedEventList = eventList.filter((_, i) => i !== index);
+    const eventToRemove = eventList[index]; // Sự kiện cần xóa
+    const updatedEventList = eventList.filter((_, i) => i !== index); // Xóa sự kiện khỏi danh sách
+  
+    // Kiểm tra nếu sự kiện là một "Goal" và điều chỉnh điểm số
+    if (eventToRemove.eventType === "Goal") {
+      // Cập nhật điểm số
+      if (eventToRemove.homePlayer) {
+        setHomeScore((prevScore) => (
+          (parseInt(prevScore) - parseInt(eventToRemove.eventCount)).toString()
+        ));
+      }
+      if (eventToRemove.awayPlayer) {
+        setAwayScore((prevScore) => (
+          (parseInt(prevScore) - parseInt(eventToRemove.eventCount)).toString()
+        ));
+      }
+    }
+  
+    // Cập nhật lại danh sách sự kiện sau khi xóa
     setEventList(updatedEventList);
   };
 
@@ -109,12 +156,13 @@ const DeclareMatchModal = ({
         matchId: match.id,
         homeScore,
         awayScore,
-        events: eventList
+        events: eventList,
+        isDefined
       };
       onSubmitDetails(matchData); // Pass match data to the parent component
       onClose();
     } else {
-      alert("Please fill in all details.");
+      alert("Làm ơn điền đủ sự kiện/ tỉ số.");
     }
   };
 
@@ -127,7 +175,9 @@ const DeclareMatchModal = ({
     isOpen && (
       <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
         <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg mx-4 max-h-[700px] overflow-auto">
-          <h2 className="text-xl font-bold mb-4">Declare Match Details</h2>
+          <h2 className="text-xl font-bold mb-4">{
+            isDefined ? 'Cập nhật trận đấu' : 'Khai báo trận đấu'
+            }</h2>
           <form onSubmit={handleSubmit}>
             {/* Pre-fill match details */}
             <p className="font-semibold text-lg mb-4">{formatDate(date)}</p>
@@ -207,7 +257,7 @@ const DeclareMatchModal = ({
                   onChange={(e) => setEventType(e.target.value)}
                   className="w-40 px-4 py-2 border border-gray-300 rounded-lg mr-4"
                 >
-                  <option value="">Select Event Type</option>
+                  <option value="">Chọn loại sự kiện</option>
                   {events.map((event) => (
                     <option key={event.id} value={event.name}>
                       {event.name}
@@ -232,7 +282,7 @@ const DeclareMatchModal = ({
                 onClick={handleAddEvent}
                 className="px-4 py-2 bg-blue-500 text-white rounded-md mb-4"
               >
-                Add Event
+                Thêm sự kiện
               </button>
             </div>
 
@@ -256,7 +306,7 @@ const DeclareMatchModal = ({
                   onClick={() => handleRemoveEvent(index)}
                   className="text-red-500"
                 >
-                  Remove
+                  Xoá
                 </button>
               </li>
             ))}
@@ -269,13 +319,13 @@ const DeclareMatchModal = ({
                 onClick={onClose}
                 className="px-4 py-2 bg-gray-300 text-black rounded-md"
               >
-                Close
+                Đóng
               </button>
               <button
                 type="submit"
                 className="px-4 py-2 bg-blue-500 text-white rounded-md"
               >
-                Submit
+                Cập nhật
               </button>
             </div>
           </form>
