@@ -140,13 +140,13 @@ const Matches = () => {
                 </p>
                 <p className="text-2xl font-bold text-center">
                   <span
-                    className={`p-1 rounded-md mr-1 ${home_score > away_score ? 'bg-yellow-500' : 'bg-black'} text-white`}
+                    className={`score p-1 rounded-md mr-1 ${home_score > away_score ? 'bg-yellow-500' : 'bg-black'} text-white`}
                   >
                     {home_score}
                   </span>
                   :
                   <span
-                    className={`p-1 rounded-md ml-1 ${away_score > home_score ? 'bg-yellow-500' : 'bg-black'} text-white`}
+                    className={`score p-1 rounded-md ml-1 ${away_score > home_score ? 'bg-yellow-500' : 'bg-black'} text-white`}
                   >
                     {away_score}
                   </span>
