@@ -32,72 +32,61 @@ const Ranking = () => {
   }
 
   return (
-    <div className="sm:p-2">
-      {leaderboard && leaderboard.length > 0 && (
-        <>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-center">Bảng Xếp Hạng</h2>
-          <div className="overflow-x-auto shadow-md rounded-lg">
-            <table className="min-w-full table-auto text-sm sm:text-base">
-              <thead>
-                <tr className="bg-gray-800 text-white">
-                <div className="border bg-gray-800 sticky left-0 z-20 truncate">
-                  <th className="py-2 px-4 text-center left-0 bg-gray-800 z-10">#</th>
-                  <th className="py-2 px-4 text-center left-16 bg-gray-800 z-10">CLB</th>
-                  </div>
-                  <th className="py-2 px-4 text-center">ĐĐ</th>
-                  <th className="py-2 px-4 text-center">W</th>
-                  <th className="py-2 px-4 text-center">D</th>
-                  <th className="py-2 px-4 text-center">L</th>
-                  <th className="py-2 px-4 text-center">BT</th>
-                  <th className="py-2 px-4 text-center">SBT</th>
-                  <th className="py-2 px-4 text-center">HS</th>
-                  <th className="py-2 px-4 text-center">Đ</th>
-                  <th className="py-2 px-4 text-center">KQ</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leaderboard.map((team, index) => (
-                  <tr key={index} className="hover:bg-gray-50 border-b">
-                    <div className={`border bg-white sticky left-0 z-20 truncate ${index < 2 ? 'border-l-yellow-200 border-l-4' : ''}`}>
-                      <td className=" px-4 py-2 text-center bg-white ">{team.rank}</td>
-                      <td className=" px-4 py-2 text-center bg-white border-0 ">{team.teamName}</td>
-                    </div>
-                    <td className="border px-4 py-2 text-center">{team.matchesPlayed}</td>
-                    <td className="border px-4 py-2 text-center">{team.wins}</td>
-                    <td className="border px-4 py-2 text-center">{team.draws}</td>
-                    <td className="border px-4 py-2 text-center">{team.losses}</td>
-                    <td className="border px-4 py-2 text-center">{team.goalsFor}</td>
-                    <td className="border px-4 py-2 text-center">{team.goalsAgainst}</td>
-                    <td className="border px-4 py-2 text-center">{team.goalDifference}</td>
-                    <td className="border px-4 py-2 text-center">{team.points}</td>
-                    <td className="border px-4 py-2 text-center">
-                      <div className="flex justify-center space-x-1">
-                        {team.recentResults && team.recentResults.map((result, i) => (
-                          <span
-                            key={i}
-                            className={`w-6 h-6 flex items-center justify-center rounded-full ${
-                              result === "W"
-                                ? "bg-green-500 text-white"
-                                : result === "D"
-                                ? "bg-yellow-500 text-white"
-                                : result === "L"
-                                ? "bg-red-500 text-white"
-                                : "bg-gray-300 text-gray-800"
-                            }`}
-                          >
-                            {result}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
-    </div>
+    <div className="overflow-x-auto">
+  <table className="min-w-full table-auto text-sm sm:text-base">
+    <thead>
+      <tr className="bg-gray-800 text-white">
+        <th className="text-center sticky left-0 bg-gray-800 z-20">CLB</th>
+        <th className="py-2 px-4 text-center">ĐĐ</th>
+        <th className="py-2 px-4 text-center">W</th>
+        <th className="py-2 px-4 text-center">D</th>
+        <th className="py-2 px-4 text-center">L</th>
+        <th className="py-2 px-4 text-center">BT</th>
+        <th className="py-2 px-4 text-center">SBT</th>
+        <th className="py-2 px-4 text-center">HS</th>
+        <th className="py-2 px-4 text-center">Đ</th>
+        <th className="py-2 px-4 text-center">KQ</th>
+      </tr>
+    </thead>
+    <tbody>
+      {leaderboard.map((team, index) => (
+        <tr key={index} className="hover:bg-gray-50 border-b">
+          <td className="border truncate sticky left-0 bg-white z-10">
+            <p className=" px-4 py-2">
+              {`#${team.rank} ${team.teamName}`}
+            </p>
+          </td>
+          <td className="border px-4 py-2 text-center">{team.matchesPlayed}</td>
+          <td className="border px-4 py-2 text-center">{team.wins}</td>
+          <td className="border px-4 py-2 text-center">{team.draws}</td>
+          <td className="border px-4 py-2 text-center">{team.losses}</td>
+          <td className="border px-4 py-2 text-center">{team.goalsFor}</td>
+          <td className="border px-4 py-2 text-center">{team.goalsAgainst}</td>
+          <td className="border px-4 py-2 text-center">{team.goalDifference}</td>
+          <td className="border px-4 py-2 text-center">{team.points}</td>
+          <td className="border px-4 py-2 text-center">
+            <div className="flex justify-center space-x-1">
+              {team.recentResults.map((result, i) => (
+                <span
+                  key={i}
+                  className={`w-6 h-6 flex items-center justify-center rounded-full ${
+                    result === "W"
+                      ? "bg-green-500 text-white"
+                      : result === "D"
+                      ? "bg-yellow-500 text-white"
+                      : "bg-red-500 text-white"
+                  }`}
+                >
+                  {result}
+                </span>
+              ))}
+            </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
   );
 };
 
