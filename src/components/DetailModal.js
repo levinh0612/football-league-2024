@@ -53,37 +53,38 @@ const DetailModal = ({ isOpen, onClose, match }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-    
+
         <p className="text-2xl font-bold text-center">
+          <p className="text-xl font-semibold mb-4 text-center">
+            <span
+              className={`${match.home_score > match.away_score ? "text-yellow-500" : "text-black"
+                }`}
+            >
+              {match.home_team}
+            </span>
+            <span className="font-normal mx-2">vs</span>
+            <span
+              className={`${match.away_score > match.home_score ? "text-yellow-500" : "text-black"
+                }`}
+            >
+              {match.away_team}
+            </span>
+          </p>
+
           <span
-            className={`pr-2 ${
-              match.home_score > match.away_score ? "text-yellow-500" : "text-black"
-            }`}
-          >
-            {match.home_team}
-          </span>
-          <span
-            className={`score p-1 rounded-md mx-1 ${
-              match.home_score > match.away_score ? "bg-yellow-500" : "bg-black"
-            } text-white`}
+            className={`score p-1 rounded-md mx-1 ${match.home_score > match.away_score ? "bg-yellow-500" : "bg-black"
+              } text-white`}
           >
             {match.home_score}
           </span>
           :
           <span
-            className={`score p-1 rounded-md mx-1 ${
-              match.away_score > match.home_score ? "bg-yellow-500" : "bg-black"
-            } text-white`}
+            className={`score p-1 rounded-md mx-1 ${match.away_score > match.home_score ? "bg-yellow-500" : "bg-black"
+              } text-white`}
           >
             {match.away_score}
           </span>
-          <span
-            className={`pl-2 ${
-              match.home_score < match.away_score ? "text-yellow-500" : "text-black"
-            }`}
-          >
-            {match.away_team}
-          </span>
+
         </p>
 
         <p className="mt-4">
