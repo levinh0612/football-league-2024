@@ -151,19 +151,15 @@ const DeclareMatchModal = ({
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (homeScore && awayScore && eventList.length > 0) {
-      const matchData = {
-        matchId: match.id,
-        homeScore,
-        awayScore,
-        events: eventList,
-        isDefined
-      };
-      onSubmitDetails(matchData); // Pass match data to the parent component
-      onClose();
-    } else {
-      alert("Làm ơn điền đủ sự kiện/ tỉ số.");
-    }
+    const matchData = {
+      matchId: match.id,
+      homeScore,
+      awayScore,
+      events: eventList,
+      isDefined
+    };
+    onSubmitDetails(matchData); // Pass match data to the parent component
+    onClose();
   };
 
   const findNameById =(id, list) => {
