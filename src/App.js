@@ -3,7 +3,7 @@ import { Tabs } from "antd";
 import Matches from "./components/Matches";
 import Ranking from "./components/Ranking";
 import Statistics from "./components/Statistics";
-import Players from "./components/Players";
+// import Players from "./components/Players";
 import Results from "./components/Results";
 
 const { TabPane } = Tabs;
