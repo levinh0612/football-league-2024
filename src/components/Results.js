@@ -67,7 +67,7 @@ const Results = () => {
             <FontAwesomeIcon icon={icon} className={`text-3xl mr-4 ${colorClass}`} />
             <h3 className="text-2xl font-semibold">{title}</h3>
           </div>
-          <p className="text-lg font-medium text-gray-700">{value}</p>
+          {/* <p className="text-lg font-medium text-gray-700">{value}</p> */}
           {
             Object.entries(groupedData).length > 0 ? (
               <div className="mt-4">
