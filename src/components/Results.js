@@ -114,7 +114,8 @@ const Results = () => {
             <div key={prize.tag}>
               {renderCard(
                 prize.prize_name,
-                `${prize.value.toLocaleString()}`,
+                // `${prize.value.toLocaleString()}`,
+                '',
                 prize.player_name 
                   ? `${prize.player_name} `
                   : prize.team_name 
